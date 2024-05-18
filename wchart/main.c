@@ -36,7 +36,7 @@ int main() {
         if (VowCount >= 3){
             count++;
         }
-        a = wcstok(NULL, L" \n");
+        word = wcstok(NULL, L" \n");
     }
 
     printf("Количество слов с 3 гласными: %d\n", count);

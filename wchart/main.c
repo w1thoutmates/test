@@ -25,11 +25,11 @@ int main() {
     int VowCount = 0;
     int string_len = wcslen(str);
 
-    wchar_t *a = wcstok(str, L" \n");
-    while (a != NULL) {
+    wchar_t *word = wcstok(str, L" \n");
+    while (word != NULL) {
         VowCount = 0;
-        for(int i = 0; i < wcslen(a); i++) {
-            if (isVowels(a[i])) {
+        for(int i = 0; i < wcslen(word); i++) {
+            if (isVowels(word[i])) {
                 VowCount++;
             }
         }

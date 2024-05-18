@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include "wchar.h"
 
 int isVowels(int c) {
-    c = tolower(c);
+    c = towlower(c);
 
-    if (c == 'а' || c == 'о' || c == 'у' || c == 'ы' || c == 'е' || c == 'ё' || c == 'ю' || c == 'я' ||
-        c == 'a' || c == 'o' || c == 'u' || c == 'i' || c == 'e' || c == 'y' || c == 'u' || c == 'a') {
+    if (c == L'а' || c == L'о' || c == L'у' || c == L'ы' || c == L'е' || c == L'ё' || c == L'ю' || c == L'я' ||
+        c == L'a' || c == L'o' || c == L'u' || c == L'i' || c == L'e' || c == L'y' || c == L'u' || c == L'a') {
         return 1;
-
     }
     return 0;
 }
@@ -16,27 +16,27 @@ int isVowels(int c) {
 int main() {
     system("chcp 65001");
 
-    char str[100];
+    wchar_t str[100];
     int count = 0;
 
     printf("Введите строку: ");
-    fgets(str, sizeof(str), stdin);
+    fgetws(str, sizeof(str) / sizeof(wchar_t), stdin);
 
     int VowCount = 0;
-    int string_len = strlen(str);
+    int string_len = wcslen(str);
 
-    char *token = strtok(str, " \n");
-    while (token != NULL) {
+    wchar_t *a = wcstok(str, L" \n");
+    while (a != NULL) {
         VowCount = 0;
-        for(int i = 0; i < strlen(token); i++) {
-            if (isVowels(token[i])) {
+        for(int i = 0; i < wcslen(a); i++) {
+            if (isVowels(a[i])) {
                 VowCount++;
             }
         }
         if (VowCount >= 3){
             count++;
         }
-        token = strtok(NULL, " \n");
+        a = wcstok(NULL, L" \n");
     }
 
     printf("Количество слов с 3 гласными: %d\n", count);

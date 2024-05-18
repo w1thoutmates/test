@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#include "wchar.h"
+#include <wchar.h>
 
 int isVowels(int c) {
     c = towlower(c);

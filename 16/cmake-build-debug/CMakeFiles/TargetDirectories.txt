@@ -1,0 +1,3 @@
+C:/Users/user/thirsty/cmake-build-debug/CMakeFiles/winapi.dir
+C:/Users/user/thirsty/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/user/thirsty/cmake-build-debug/CMakeFiles/rebuild_cache.dir

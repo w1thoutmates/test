@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#include "wchar.h"
+#include <wchar.h>
 
 int isVowels(int c) {
     c = towlower(c);
@@ -25,18 +25,18 @@ int main() {
     int VowCount = 0;
     int string_len = wcslen(str);
 
-    wchar_t *a = wcstok(str, L" \n");
-    while (a != NULL) {
+    wchar_t *word = wcstok(str, L" \n");
+    while (word != NULL) {
         VowCount = 0;
-        for(int i = 0; i < wcslen(a); i++) {
-            if (isVowels(a[i])) {
+        for(int i = 0; i < wcslen(word); i++) {
+            if (isVowels(word[i])) {
                 VowCount++;
             }
         }
         if (VowCount >= 3){
             count++;
         }
-        a = wcstok(NULL, L" \n");
+        word = wcstok(NULL, L" \n");
     }
 
     printf("Количество слов с 3 гласными: %d\n", count);

@@ -5,14 +5,10 @@
 
 Student* createStudent(char* surname, char* name, char* gender, int age, char* group, int mark1, int mark2, int mark3) {
     Student* newStudent = malloc(sizeof(Student));
-    newStudent->surname = malloc(strlen(surname) + 1);
     strcpy(newStudent->surname, surname);
-    newStudent->name = malloc(strlen(name) + 1);
     strcpy(newStudent->name, name);
-    newStudent->gender = malloc(strlen(gender) + 1);
     strcpy(newStudent->gender, gender);
     newStudent->age = age;
-    newStudent->group = malloc(strlen(group) + 1);
     strcpy(newStudent->group, group);
     newStudent->mark1 = mark1;
     newStudent->mark2 = mark2;
@@ -68,14 +64,27 @@ void save_student(Student *studentsList,const char *filename){
 
 Student* load_students(const char *filename) {
     FILE *file = fopen(filename, "rb");
+    if (file == NULL) {
+        perror("Error opening file");
+        return NULL;
+    }
 
     Student *studentsList = NULL;
     Student stud;
 
     while (fread(&stud, sizeof(Student), 1, file) == 1) {
-        Student *newStudent = createStudent(stud.surname, stud.name, stud.gender, stud.age,
-                                            stud.group, stud.mark1, stud.mark2, stud.mark3);
-        if (studentsList != NULL) {
+        char *surname = malloc(strlen(stud.surname) + 1);
+        char *name = malloc(strlen(stud.name) + 1);
+        char *gender = malloc(strlen(stud.gender) + 1);
+        char *group = malloc(strlen(stud.group) + 1);
+
+        strcpy(surname, stud.surname);
+        strcpy(name, stud.name);
+        strcpy(gender, stud.gender);
+        strcpy(group, stud.group);
+
+        Student *newStudent = createStudent(surname, name, gender, stud.age, group, stud.mark1, stud.mark2, stud.mark3);
+        if (studentsList == NULL) {
             studentsList = newStudent;
         }
         else {

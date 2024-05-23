@@ -19,7 +19,7 @@ int main() {
     wchar_t str[100];
     int count = 0;
 
-    printf("Введите строку: ");
+    printf(L"Введите строку: ");
     fgetws(str, sizeof(str) / sizeof(wchar_t), stdin);
 
     int VowCount = 0;

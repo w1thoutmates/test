@@ -40,11 +40,13 @@ int main() {
 
     save_student(studentsList, "D:\\students.bin");
 
+    param1.studentsList = load_students(param1.studentsList, "D:\\students.bin");
+    param2.studentsList = load_students(param2.studentsList, "D:\\students.bin");
+    param3.studentsList = load_students(param3.studentsList, "D:\\students.bin");
+
     ОЧИСТИТЬ(studentsList);
     ОЧИСТИТЬ(student2);
     ОЧИСТИТЬ(student3);
     ОЧИСТИТЬ(student4);
-
-    studentsList = load_students("D:\\students.bin");
     return 0;
 }

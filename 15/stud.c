@@ -56,13 +56,22 @@ void save_student(Student *studentsList,const char *filename){
         perror("Error opening file");
         return NULL;
     }
+    char surname[30];
+    char name[30];
+    char gender[10];
+    char group[10];
     Student *stud = studentsList;
     while(stud != NULL){
-        fwrite(stud.surname, sizeof(stud.surname), 1, file);
-        fwrite(stud.name, sizeof(stud.name), 1, file);
-        fwrite(stud.gender, sizeof(stud.gender), 1, file);
+        strcpy(surname, stud.surname);
+        strcpy(name, stud.name);
+        strcpy(gender, stud.gender);
+        strcpy(group, stud.group);
+        
+        fwrite(surname, sizeof(surname), 1, file);
+        fwrite(name, sizeof(name), 1, file);
+        fwrite(gender, sizeof(gender), 1, file);
         fwrite(stud.age, sizeof(stud.age), 1, file);
-        fwrite(stud.group, sizeof(stud.group), 1, file);
+        fwrite(group, sizeof(group), 1, file);
         fwrite(stud.mark1, sizeof(stud.mark1), 1, file);
         fwrite(stud.mark2, sizeof(stud.mark2), 1, file);
         fwrite(stud.mark3, sizeof(stud.mark3), 1, file);
@@ -86,15 +95,15 @@ Student* load_students(const char *filename) {
     Student *studentsList = NULL;
     while(!feof(file)){
         Student *student = malloc(sizeof(Student));
-        surname = malloc((strlen(student.surname) + '\0');
-        name = malloc((strlen(student.name) + '\0');
-        gender = malloc((strlen(student.gender) + '\0');
-        group = malloc((strlen(student.group) + '\0');
-
         strcpy(surname, student.surname);
         strcpy(name, student.name);
         strcpy(gender, student.gender);
         strcpy(group, student.group);
+
+        surname = malloc((strlen(surname) + 1);
+        name = malloc((strlen(name) + 1);
+        gender = malloc((strlen(gender) + 1);
+        group = malloc((strlen(group) + 1);
 
         fread(surname, sizeof(surname), 1, file);
         fread(name, sizeof(name), 1, file);

@@ -17,7 +17,7 @@ typedef struct Student {
     void (*appendStudent)(void*);
     int (*NoTwoNoThree)(void*);
     void (*save_student)(struct Student*,const char*);
-    struct Student* (*load_students)(const char*);
+    struct Student* (*load_students)(struct Student*, const char*);
 } Student;
 
 typedef struct Param {
@@ -30,5 +30,5 @@ void appendStudent(void* param);
 int NoTwoNoThree(void *student);
 void printStudent(void *student);
 void save_student(Student *studentsList,const char *filename);
-Student* load_students(const char *filename);
+Student* load_students(Student* studentsList, const char *filename);
 #endif

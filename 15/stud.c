@@ -5,6 +5,10 @@
 
 Student* createStudent(char* surname, char* name, char* gender, int age, char* group, int mark1, int mark2, int mark3) {
     Student* newStudent = malloc(sizeof(Student));
+    newStudent->surname = malloc(strlen(surname) + 1);
+    newStudent->name = malloc(strlen(name) + 1);
+    newStudent->gender = malloc(strlen(gender) + 1);
+    newStudent->group = malloc(strlen(group) + 1);
     strcpy(newStudent->surname, surname);
     strcpy(newStudent->name, name);
     strcpy(newStudent->gender, gender);

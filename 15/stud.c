@@ -58,7 +58,14 @@ void save_student(Student *studentsList,const char *filename){
     }
     Student *stud = studentsList;
     while(stud != NULL){
-        fwrite(stud, sizeof(Student), 1, file);
+        fwrite(stud.surname, sizeof(stud.surname), 1, file);
+        fwrite(stud.name, sizeof(stud.name), 1, file);
+        fwrite(stud.gender, sizeof(stud.gender), 1, file);
+        fwrite(stud.age, sizeof(stud.age), 1, file);
+        fwrite(stud.group, sizeof(stud.group), 1, file);
+        fwrite(stud.mark1, sizeof(stud.mark1), 1, file);
+        fwrite(stud.mark2, sizeof(stud.mark2), 1, file);
+        fwrite(stud.mark3, sizeof(stud.mark3), 1, file);
         stud = stud->next;
     }
 
@@ -71,22 +78,33 @@ Student* load_students(const char *filename) {
         perror("Error opening file");
         return NULL;
     }
-
+    char surname[30];
+    char name[30];
+    char gender[10];
+    char group[10];
+    
     Student *studentsList = NULL;
     while(!feof(file)){
         Student *student = malloc(sizeof(Student));
-        fread(student, sizeof(Student), 1, file);
-        Student *newStudent = createStudent(student.surname, student.name, student.gender, student.age, student.group, student.mark1, student.mark2, student.mark3);
-        if (studentsList == NULL) {
-            studentsList = newStudent;
-        }
-        else {
-            Param param;
-            param.studentsList = studentsList;
-            param.newStudent = newStudent;
-            appendStudent(&param);
-        }
-    }
+        surname = malloc((strlen(student.surname) + '\0');
+        name = malloc((strlen(student.name) + '\0');
+        gender = malloc((strlen(student.gender) + '\0');
+        group = malloc((strlen(student.group) + '\0');
+
+        strcpy(surname, student.surname);
+        strcpy(name, student.name);
+        strcpy(gender, student.gender);
+        strcpy(group, student.group);
+
+        fread(surname, sizeof(surname), 1, file);
+        fread(name, sizeof(name), 1, file);
+        fread(gender, sizeof(gender), 1, file);
+        fread(student.age, sizeof(student.age), 1, file);
+        fread(group, sizeof(group), 1, file);
+        fread(student.mark1, sizeof(student.mark1), 1, file);
+        fread(student.mark2, sizeof(student.mark2), 1, file);
+        fread(student.mark3, sizeof(student.mark3), 1, file);
+
     free(student);
     fclose(file);
     return studentsList;

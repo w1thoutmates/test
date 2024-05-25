@@ -54,67 +54,76 @@ void save_student(Student *studentsList,const char *filename){
     FILE* file = fopen(filename, "wb");
     if (file == NULL) {
         perror("Error opening file");
-        return NULL;
     }
-    char surname[30];
-    char name[30];
-    char gender[10];
-    char group[10];
-    Student *stud = studentsList;
-    while(stud != NULL){
-        strcpy(surname, stud.surname);
-        strcpy(name, stud.name);
-        strcpy(gender, stud.gender);
-        strcpy(group, stud.group);
-        
-        fwrite(surname, sizeof(surname), 1, file);
-        fwrite(name, sizeof(name), 1, file);
-        fwrite(gender, sizeof(gender), 1, file);
-        fwrite(stud.age, sizeof(stud.age), 1, file);
-        fwrite(group, sizeof(group), 1, file);
-        fwrite(stud.mark1, sizeof(stud.mark1), 1, file);
-        fwrite(stud.mark2, sizeof(stud.mark2), 1, file);
-        fwrite(stud.mark3, sizeof(stud.mark3), 1, file);
-        stud = stud->next;
+
+    while(studentsList != NULL){
+        int surnameSize = strlen(studentsList->surname);
+        int nameSize = strlen(studentsList->name);
+        int genderSize = strlen(studentsList->gender);
+        int groupSize = strlen(studentsList->group);
+
+        fwrite(&surnameSize, sizeof(int), 1, file);
+        fwrite(studentsList->surname, sizeof(char), surnameSize, file);
+
+        fwrite(&nameSize, sizeof(int), 1, file);
+        fwrite(studentsList->name, sizeof(char), nameSize, file);
+
+        fwrite(&genderSize, sizeof(int), 1, file);
+        fwrite(studentsList->gender, sizeof(char), genderSize, file);
+
+        fwrite(&studentsList->age, sizeof(int), 1, file);
+
+        fwrite(&groupSize, sizeof(int), 1, file);
+        fwrite(studentsList->group, sizeof(char), groupSize, file);
+
+        fwrite(&studentsList->mark1, sizeof(int), 1, file);
+        fwrite(&studentsList->mark2, sizeof(int), 1, file);
+        fwrite(&studentsList->mark3, sizeof(int), 1, file);
+
+        studentsList = studentsList->next;
     }
 
     fclose(file);
 }
 
-Student* load_students(const char *filename) {
+Student* load_students(Student* studentsList, const char *filename) {
     FILE *file = fopen(filename, "rb");
     if (file == NULL) {
         perror("Error opening file");
         return NULL;
     }
-    char surname[30];
-    char name[30];
-    char gender[10];
-    char group[10];
-    
-    Student *studentsList = NULL;
-    while(!feof(file)){
-        Student *student = malloc(sizeof(Student));
-        strcpy(surname, student.surname);
-        strcpy(name, student.name);
-        strcpy(gender, student.gender);
-        strcpy(group, student.group);
 
-        surname = malloc((strlen(surname) + 1);
-        name = malloc((strlen(name) + 1);
-        gender = malloc((strlen(gender) + 1);
-        group = malloc((strlen(group) + 1);
+    while(!feof(file)) {
+        int surnameSize;
+        int nameSize;
+        int genderSize;
+        int groupSize;
+        fread(&surnameSize, sizeof(int), 1, file);
+        studentsList->surname = calloc(sizeof(char),surnameSize + 1);
+        studentsList->surname[surnameSize] = '\0';
 
-        fread(surname, sizeof(surname), 1, file);
-        fread(name, sizeof(name), 1, file);
-        fread(gender, sizeof(gender), 1, file);
-        fread(student.age, sizeof(student.age), 1, file);
-        fread(group, sizeof(group), 1, file);
-        fread(student.mark1, sizeof(student.mark1), 1, file);
-        fread(student.mark2, sizeof(student.mark2), 1, file);
-        fread(student.mark3, sizeof(student.mark3), 1, file);
+        fread(&nameSize, sizeof(int), 1, file);
+        studentsList->name = calloc(sizeof(char),nameSize + 1);
+        studentsList->name[nameSize] = '\0';
 
-    free(student);
+        fread(&genderSize, sizeof(int), 1, file);
+        studentsList->gender = calloc(sizeof(char),genderSize + 1);
+        studentsList->gender[genderSize] = '\0';
+
+        fread(&studentsList->age, sizeof(int), 1, file);
+
+        fread(&groupSize, sizeof(int), 1, file);
+        studentsList->group = calloc(sizeof(char),groupSize + 1);
+        studentsList->group[groupSize] = '\0';
+
+        fread(&studentsList->mark1, sizeof(int), 1, file);
+        fread(&studentsList->mark2, sizeof(int), 1, file);
+        fread(&studentsList->mark3, sizeof(int), 1, file);
+
+
+    }
+
+    free(studentsList);
     fclose(file);
     return studentsList;
-}
+    }

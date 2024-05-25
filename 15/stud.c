@@ -75,10 +75,10 @@ Student* load_students(const char *filename) {
     Student *studentsList = NULL;
     Student *student = malloc(sizeof(Student);
     while (fread(&student, sizeof(Student), 1, file) == 1) {
-        char surname = malloc(strlen(student.surname) + 1);
-        char name = malloc(strlen(student.name) + 1);
-        char gender = malloc(strlen(student.gender) + 1);
-        char group = malloc(strlen(student.group) + 1);
+        char *surname = malloc(strlen(student.surname) + 1);
+        char *name = malloc(strlen(student.name) + 1);
+        char *gender = malloc(strlen(student.gender) + 1);
+        char *group = malloc(strlen(student.group) + 1);
 
         strcpy(surname, student.surname);
         strcpy(name, student.name);
@@ -96,7 +96,7 @@ Student* load_students(const char *filename) {
             appendStudent(&param);
         }
     }
-
+    free(student);
     fclose(file);
     return studentsList;
 }

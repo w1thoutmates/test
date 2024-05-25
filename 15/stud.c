@@ -73,7 +73,7 @@ Student* load_students(const char *filename) {
     }
 
     Student *studentsList = NULL;
-    Student *student = malloc(sizeof(Student);
+    Student *student = malloc(sizeof(Student));
     while (fread(&student, sizeof(Student), 1, file) == 1) {
         char *surname = malloc(strlen(student.surname) + 1);
         char *name = malloc(strlen(student.name) + 1);

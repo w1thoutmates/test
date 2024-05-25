@@ -4,11 +4,11 @@
 #include <stdio.h>
 
 typedef struct Student {
-    char surname[30];
-    char name[30];
-    char gender[10];
+    char *surname;
+    char *name;
+    char *gender;
     int age;
-    char group[10];
+    char *group;
     int mark1;
     int mark2;
     int mark3;
